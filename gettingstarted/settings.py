@@ -57,6 +57,17 @@ SLACK_PIPELINES = [
 ]
 
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd4dasan0dad4vq',
+        'USER': 'shetuutxqmvrvb',
+        'PASSWORD': 'fcc0f8efb206a604c5a531e8636a53b2e9919b5aa8cdd082f52f229f284f07ec',
+        'HOST': 'ec2-54-225-195-3.compute-1.amazonaws.com',
+        'PORT': '5432',
+	}
+}
+
 LOGIN_URL = "/login"
 
 INSTALLED_APPS = [
@@ -129,8 +140,8 @@ WSGI_APPLICATION = "gettingstarted.wsgi.application"
 
 #DATABASE_URL = 'postgres://shetuutxqmvrvb:fcc0f8efb206a604c5a531e8636a53b2e9919b5aa8cdd082f52f229f284f07ec@ec2-54-225-195-3.compute-1.amazonaws.com:5432/d4dasan0dad4vq'
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+#DATABASES = {}
+#DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -175,4 +186,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 django_heroku.settings(locals())
-#del DATABASES['default']['OPTIONS']['sslmode']
+del DATABASES['default']['OPTIONS']['sslmode']
