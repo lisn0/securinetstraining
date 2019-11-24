@@ -7,3 +7,4 @@ requests
 slackclient
 rules
 scipy
+markdown
