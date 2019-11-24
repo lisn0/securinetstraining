@@ -8,3 +8,5 @@ slackclient
 rules
 scipy
 markdown
+bleach
+bleach_whitelist
