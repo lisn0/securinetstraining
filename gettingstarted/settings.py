@@ -19,9 +19,9 @@ import yaml
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # This is change local only:
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
+#dotenv_file = os.path.join(BASE_DIR, ".env")
+#if os.path.isfile(dotenv_file):
+#    dotenv.load_dotenv(dotenv_file)
 
 try:
     config = yaml.load(open(BASE_DIR + "/securinetsctf/config.yaml").read())
@@ -127,6 +127,7 @@ WSGI_APPLICATION = "gettingstarted.wsgi.application"
 #    }
 #}
 
+#DATABASE_URL = 'postgres://shetuutxqmvrvb:fcc0f8efb206a604c5a531e8636a53b2e9919b5aa8cdd082f52f229f284f07ec@ec2-54-225-195-3.compute-1.amazonaws.com:5432/d4dasan0dad4vq'
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
@@ -174,4 +175,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 django_heroku.settings(locals())
-del DATABASES['default']['OPTIONS']['sslmode']
+#del DATABASES['default']['OPTIONS']['sslmode']
