@@ -18,19 +18,41 @@ import django_heroku
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+try:
+    config = yaml.load(open(BASE_DIR + "/securinetsctf/config.yaml").read())
+except FileNotFoundError:
+    exit("securinetsctf/config.yaml Not Found (use securinetsctf/config.yaml.template)")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be used, if set, instead)."
+#SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be used, if set, instead)."
+
+SECRET_KEY = config["django"]["secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = config["django"]["debug"]
 
-ALLOWED_HOSTS = []
-
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config["django"]["allowed_hosts"]
 
 # Application definition
+
+
+#damn slack
+SLACK_CLIENT_ID = config["slack_oauth"]["slack_client_id"]
+SLACK_CLIENT_SECRET = config["slack_oauth"]["slack_client_secret"]
+SLACK_SCOPE = 'users:read, users.profile:read'
+SLACK_SUCCESS_REDIRECT_URL = "/"
+
+SLACK_PIPELINES = [
+    'ctf_framework.pipelines.login_user',
+]
+
+
+LOGIN_URL = "/login"
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -40,7 +62,20 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "hello",
+    "ctf_framework",
+    "django_slack_oauth",
+    "rules.apps.AutodiscoverRulesConfig",
 ]
+
+
+
+#damn i added this too
+
+AUTHENTICATION_BACKENDS = (
+    'rules.permissions.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -65,7 +100,10 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-            ]
+            ],
+            'libraries': {
+                'custom_tags': 'ctf_framework.templatetags.custom_tags',
+            }
         },
     }
 ]
