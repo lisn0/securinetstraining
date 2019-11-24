@@ -16,8 +16,8 @@ import hello.views
 
 urlpatterns = [
     #path("", hello.views.index, name="index"),
-    path("db/", hello.views.db, name="db"),
-    path("admin/", admin.site.urls),
+    #path("db/", hello.views.db, name="db"),
+    #path("admin/", admin.site.urls),
     path('', include('ctf_framework.urls')),
     # path('admin/', admin.site.urls, name="admin"),
     path('slack/', include('django_slack_oauth.urls')),

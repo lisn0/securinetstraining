@@ -27,13 +27,13 @@ except FileNotFoundError:
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be used, if set, instead)."
+SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be used, if set, instead)."
 
-SECRET_KEY = config["django"]["secret_key"]
+#SECRET_KEY = config["django"]["secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = config["django"]["debug"]
+DEBUG = True
+#DEBUG = config["django"]["debug"]
 
 #ALLOWED_HOSTS = []
 ALLOWED_HOSTS = config["django"]["allowed_hosts"]
